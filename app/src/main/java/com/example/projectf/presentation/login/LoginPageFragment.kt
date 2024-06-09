@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.projectf.data.Client
 import com.example.projectf.data.GithubApi
-import com.example.projectf.GithubUser
 import com.example.projectf.R
 import com.example.projectf.databinding.FragmentLoginPageBinding
+import com.example.projectf.domain.models.GithubUser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,7 +61,7 @@ class LoginPageFragment : Fragment() {
                         val user = response.body()
                         Toast.makeText(
                             requireContext(),
-                            "Welcome ${user?.name}",
+                            "Welcome ${user?.login}",
                             Toast.LENGTH_SHORT
                         ).show()
                         findNavController().navigate(R.id.action_loginPageFragment_to_homeFragment)

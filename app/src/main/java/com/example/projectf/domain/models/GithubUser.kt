@@ -1,9 +1,11 @@
 package com.example.projectf.domain.models
 
+import com.google.gson.annotations.SerializedName
+
 data class GithubUser(
     val login: String,
     val id: Int,
-    val avatarUrl: String,
-    val name: String,
-    val email: String
+    @SerializedName("avatar_url")
+    val avatarUrl: String?,
+    val type: String,
 )

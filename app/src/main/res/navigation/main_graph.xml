@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/allUsersFragment"
-        android:name="com.example.projectf.presentation.AllUsersFragment"
+        android:name="com.example.projectf.presentation.allusers.AllUsersFragment"
         android:label="AllUsersFragment"
         tools:layout="@layout/fragment_all_users"/>
     <fragment
         android:id="@+id/repositoriesFragment"
-        android:name="com.example.projectf.presentation.RepositoriesFragment"
+        android:name="com.example.projectf.presentation.repositorylist.RepositoriesFragment"
         android:label="RepositoriesFragment"
         tools:layout="@layout/fragment_repositories"/>
     <fragment

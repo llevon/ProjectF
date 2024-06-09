@@ -31,13 +31,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_login"
         app:hintTextColor="@color/green"
-        app:cursorColor="@color/green">
+        app:cursorColor="@color/green"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/black"
             android:textColorHint="@color/green"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:textSize="12sp"
+            android:textColor="@color/black"
             android:textColorHint="@color/green" />
     </com.google.android.material.textfield.TextInputLayout>
 
