@@ -2,25 +2,27 @@ package com.example.projectf.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.projectf.R
 import com.example.projectf.databinding.FragentMainBinding
 
-class MainFragment:Fragment() {
+class MainFragment : Fragment() {
     private var _binding: FragentMainBinding? = null
     private val binding: FragentMainBinding
-        get() = _binding?: throw Exception("fragment binding error")
+        get() = _binding ?: throw Exception("fragment binding error")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragentMainBinding.inflate(inflater,container,false)
+        _binding = FragentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,9 +30,9 @@ class MainFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBottomNavigation()
     }
-
-    private fun setupBottomNavigation(){
-        val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
+    private fun setupBottomNavigation() {
+        val navHostFragment =
+            childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
         val navHostController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navHostController)
 

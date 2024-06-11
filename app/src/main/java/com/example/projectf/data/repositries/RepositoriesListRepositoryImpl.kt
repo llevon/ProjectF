@@ -1,5 +1,6 @@
 package com.example.projectf.data.repositries
 
+import android.util.Log
 import com.example.projectf.data.dtos.RepositoriesDto
 import com.example.projectf.data.mappers.toRepositories
 import com.example.projectf.data.network.ApiService
@@ -19,6 +20,7 @@ class RepositoriesListRepositoryImpl(
             emit(Resource.Loading)
             val response = apiService.getRepositories()
             if (response.isSuccessful) {
+                Log.d("request", "its send")
                 response.body()?.let {
                     emit(Resource.Success(it.toRepositories()))
                 }

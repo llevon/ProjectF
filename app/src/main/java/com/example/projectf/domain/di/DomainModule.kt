@@ -11,11 +11,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.koin.dsl.module
 
-val domainModule = module {
+/*val domainModule = module {
     factory<GetRepositoriesListUseCase> {
         GetRepositoriesListUseCase(repositoriesListRepository = get())
     }
-}
+}*/
 @Module
 @InstallIn(SingletonComponent::class)
 object DomainModule{

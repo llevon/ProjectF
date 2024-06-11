@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+
     <style name="Theme.ProjectF" parent="Base.Theme.ProjectF" />
 
     <style name="Theme.MyApp.Splash" parent="Theme.SplashScreen">
