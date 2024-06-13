@@ -19,5 +19,14 @@
         tools:layout="@layout/fragment_profile"
         android:id="@+id/profileFragment"
         android:name="com.example.projectf.presentation.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginPageFragment2"
+            app:destination="@id/loginPageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginPageFragment2"
+        android:name="com.example.projectf.presentation.login.LoginPageFragment"
+        android:label="LoginPageFragment"
+        tools:layout="@layout/fragment_login_page"/>
 </navigation>

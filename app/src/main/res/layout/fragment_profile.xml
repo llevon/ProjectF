@@ -4,7 +4,41 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white">
+    android:background="@color/md_theme_surface">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/md_theme_primary">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Toolbar
+                android:id="@+id/tb_toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:titleTextColor="@color/white"
+                android:title="Profile"
+                android:layout_marginLeft="24dp" />
+
+            <ImageButton
+                android:id="@+id/ic_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_profile"
@@ -16,13 +50,14 @@
         app:cardCornerRadius="64dp"
         app:strokeWidth="0dp"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginVertical="24dp">
+        android:layout_marginVertical="128dp"
+        >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_profilepicture"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            />
+            android:scaleType="centerCrop" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -34,17 +69,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="username"
         android:layout_marginVertical="24dp"
-        />
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log Out"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/md_theme_primary"
         app:layout_constraintTop_toBottomOf="@id/tv_username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginVertical="24dp"/>
+        android:layout_marginVertical="24dp"
+        android:textColor="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

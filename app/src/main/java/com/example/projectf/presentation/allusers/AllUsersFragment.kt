@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -43,8 +44,23 @@ class AllUsersFragment:Fragment() {
         }
     }
     private fun collectState() {
-        viewModel.state.onEach {
-            adapter.submitList(it.users)
+        viewModel.state.onEach { state ->
+            binding.shimmerLayout.apply {
+                if (state.isLoading) {
+                    startShimmer()
+                    visibility = View.VISIBLE
+                } else {
+                    stopShimmer()
+                    visibility = View.GONE
+                }
+            }
+            binding.swipeRefreshLayout.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+            adapter.submitList(state.users)
+
+            state.errorMessage?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
+
         }.launchIn(lifecycleScope)
     }
     private fun setupRecyclerView() = with(binding) {

@@ -68,6 +68,9 @@ dependencies {
     //glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    //shimmer effect
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
     //others
     implementation("androidx.fragment:fragment-ktx:1.7.1")
     implementation(libs.androidx.core.ktx)

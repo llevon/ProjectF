@@ -4,25 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.projectf.databinding.FragmentAllUsersBinding
 import com.example.projectf.databinding.FragmentRepositoriesBinding
+import com.example.projectf.presentation.main.SharedViewModel
 import com.example.projectf.presentation.repositorylist.adapters.RepositoriesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @AndroidEntryPoint
+
 class RepositoriesFragment : Fragment() {
     private var _binding: FragmentRepositoriesBinding? = null
-    private val binding: FragmentRepositoriesBinding
-        get() = _binding ?: throw Exception("fragment binding error")
+    private val binding get() = _binding!!
+
     private val adapter = RepositoriesAdapter()
     private val viewModel: RepositoriesViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,29 +38,55 @@ class RepositoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        collectState()
         setupRecyclerView()
-        viewModel.getRepositories()
+        collectState()
+        observeUsernameChanges()
+        setupSwipeRefreshLayout()
+    }
+
+    private fun observeUsernameChanges() {
+        sharedViewModel.username.observe(viewLifecycleOwner) { username ->
+            viewModel.getRepositories(username)
+        }
+    }
+
+    private fun setupSwipeRefreshLayout() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getRepositories()
+            sharedViewModel.username.value?.let { username ->
+                viewModel.getRepositories(username)
+            }
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
     private fun collectState() {
-        viewModel.state.onEach {
-            adapter.submitList(it.repositories)
-        }.launchIn(lifecycleScope)
+        viewModel.state.onEach { state ->
+            binding.shimmerLayout.apply {
+                if (state.isLoading) {
+                    startShimmer()
+                    visibility = View.VISIBLE
+                } else {
+                    stopShimmer()
+                    visibility = View.GONE
+                }
+            }
+            binding.swipeRefreshLayout.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+            adapter.submitList(state.repositories)
+
+            state.errorMessage?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun setupRecyclerView() = with(binding) {
-        rvRepositories.layoutManager =
+    private fun setupRecyclerView() {
+        binding.rvRepositories.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        rvRepositories.adapter = adapter
+        binding.rvRepositories.adapter = adapter
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

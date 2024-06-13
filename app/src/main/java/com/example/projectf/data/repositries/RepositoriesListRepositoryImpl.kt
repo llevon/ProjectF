@@ -15,10 +15,10 @@ import java.lang.Exception
 class RepositoriesListRepositoryImpl(
     private val apiService: ApiService
 ) : RepositoriesListRepository {
-    override fun getRepositoriesList(): Flow<Resource<List<Repositories>>> {
+    override fun getRepositoriesList(username: String): Flow<Resource<List<Repositories>>> {
         return flow {
             emit(Resource.Loading)
-            val response = apiService.getRepositories()
+            val response = apiService.getRepositories(username)
             if (response.isSuccessful) {
                 Log.d("request", "its send")
                 response.body()?.let {

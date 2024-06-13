@@ -7,12 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.projectf.data.Client
 import com.example.projectf.data.GithubApi
 import com.example.projectf.R
 import com.example.projectf.databinding.FragmentLoginPageBinding
 import com.example.projectf.domain.models.GithubUser
+import com.example.projectf.presentation.main.SharedPreferencesManager
+import com.example.projectf.presentation.main.SharedViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +25,7 @@ class LoginPageFragment : Fragment() {
     private var _binding: FragmentLoginPageBinding? = null
     private val binding: FragmentLoginPageBinding
         get() = _binding ?: throw Exception("fragment binding error")
-
+    private val sharedViewModel:SharedViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +47,7 @@ class LoginPageFragment : Fragment() {
                 val token = binding.etToken.text.toString().trim()
                 Log.d("is this wokring??????????", username )
                 if (username.isNotEmpty() && token.isNotEmpty()) {
+                    sharedViewModel.saveUsername(username)
                     signInWithGitHub(token)
                 } else {
                     Toast.makeText(requireContext(), "Please enter your username and token", Toast.LENGTH_SHORT).show()

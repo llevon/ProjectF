@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class GetRepositoriesListUseCase(
     private val repositoriesListRepository: RepositoriesListRepository
 ) {
-    operator fun invoke(): Flow<Resource<List<Repositories>>>{
-        return repositoriesListRepository.getRepositoriesList()
+    operator fun invoke(username: String): Flow<Resource<List<Repositories>>>{
+        return repositoriesListRepository.getRepositoriesList(username)
     }
 }

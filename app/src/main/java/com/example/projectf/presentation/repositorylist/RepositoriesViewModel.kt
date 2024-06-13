@@ -24,14 +24,16 @@ class RepositoriesViewModel @Inject constructor(
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
 
-    fun getRepositories() {
-        getRepositoriesListUseCase().
+    fun getRepositories(username: String) {
+        getRepositoriesListUseCase(username).
                 flowOn(Dispatchers.IO)
             .onEach { resource ->
                 when(resource){
-                    is Resource.Error -> Unit
-                    Resource.Loading -> Unit
-                    is Resource.Success -> _state.update { it.copy(repositories = resource.model) }
+                    is Resource.Error -> {
+                        _state.update { it.copy(isLoading = false, errorMessage = resource.exception.message) }
+                    }
+                    Resource.Loading -> _state.update { it.copy(isLoading = true) }
+                    is Resource.Success -> _state.update { it.copy(repositories = resource.model, isLoading = false) }
                 }
 
             }
@@ -40,6 +42,8 @@ class RepositoriesViewModel @Inject constructor(
     }
 
     data class State(
-        val repositories: List<Repositories> = emptyList()
+        val repositories: List<Repositories> = emptyList(),
+        val isLoading: Boolean = false,
+        val errorMessage: String? = null
     )
 }

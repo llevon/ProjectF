@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-     >
+    android:background="@color/md_theme_surface" >
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_login"
@@ -23,25 +22,24 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="48dp"
         android:hint="username"
-        app:boxBackgroundColor="@color/gray"
+        app:boxBackgroundColor="@color/md_theme_surfaceContainer"
         app:boxCornerRadiusBottomEnd="24dp"
         app:boxCornerRadiusBottomStart="24dp"
         app:boxCornerRadiusTopEnd="24dp"
         app:boxCornerRadiusTopStart="24dp"
-        app:boxStrokeColor="@color/green"
+        app:boxStrokeColor="@color/md_theme_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_login"
-        app:hintTextColor="@color/green"
-        app:cursorColor="@color/green"
-        >
+        app:hintTextColor="@color/md_theme_primary"
+        app:cursorColor="@color/md_theme_primary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/green"/>
+            android:textColor="@color/md_theme_onSurface"
+            android:textColorHint="@color/md_theme_primary"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -55,15 +53,15 @@
         app:boxCornerRadiusBottomStart="24dp"
         app:boxCornerRadiusTopEnd="24dp"
         app:boxCornerRadiusTopStart="24dp"
-        app:boxBackgroundColor="@color/gray"
-        app:boxStrokeColor="@color/green"
+        app:boxBackgroundColor="@color/md_theme_surfaceContainer"
+        app:boxStrokeColor="@color/md_theme_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_username"
-        app:hintTextColor="@color/green"
-        app:counterTextColor="@color/green"
-        app:placeholderTextColor="@color/green"
-        app:cursorErrorColor="@color/green"
-        app:cursorColor="@color/green">
+        app:hintTextColor="@color/md_theme_primary"
+        app:counterTextColor="@color/md_theme_primary"
+        app:placeholderTextColor="@color/md_theme_primary"
+        app:cursorErrorColor="@color/md_theme_primary"
+        app:cursorColor="@color/md_theme_primary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_token"
@@ -71,8 +69,8 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:textSize="12sp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/green" />
+            android:textColor="@color/md_theme_onSurface"
+            android:textColorHint="@color/md_theme_primary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -80,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/md_theme_primary"
         android:text="Log In"
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="@id/et_password"

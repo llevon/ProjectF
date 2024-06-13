@@ -30,9 +30,11 @@ class AllUsersViewModel @Inject constructor(
         flowOn(Dispatchers.IO)
             .onEach { resource ->
                 when(resource){
-                    is Resource.Error -> Unit
-                    Resource.Loading -> Unit
-                    is Resource.Success -> _state.update { it.copy(users = resource.model) }
+                    is Resource.Error -> {
+                        _state.update { it.copy(isLoading = false, errorMessage = resource.exception.message) }
+                    }
+                    Resource.Loading -> _state.update { it.copy(isLoading = true) }
+                    is Resource.Success -> _state.update { it.copy(users = resource.model, isLoading = false) }
                 }
 
             }
@@ -41,6 +43,8 @@ class AllUsersViewModel @Inject constructor(
     }
 
     data class State(
-        val users: List<GithubUser> = emptyList()
+        val users: List<GithubUser> = emptyList(),
+        val isLoading: Boolean = false,
+        val errorMessage: String? = null
     )
 }
